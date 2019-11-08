@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap3/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../js/bootstrap3/css/bootstrap.css">
+
+    <link rel="stylesheet" href="../js/bootstrap-table/bootstrap-table.css">
+    <script src="../js/bootstrap-table/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table/locale/bootstrap-table-zh-CN.js"></script>
+    <script src="../js/bootstrap-bootbox/bootbox.all.min.js"></script>
+</head>
+<body>
+<table class="table" id="goodsTable"></table>
+</body>
+<script>
+    $(function(){
+        goodsTable()
+    })
+    function goodsTable(){
+        $("#goodsTable").bootstrapTable({
+            url:'../findGoods',
+            method:'post',
+            contentType:'application/x-www-form-urlencoded',//post请求按照表单方式
+            columns:[
+                {checkbox:true},
+                {field:'goodsId',title:'主键'},
+                {field:'goodsName',title:'商品名'},
+                {field:'goodsPrice',title:'商品单价'},
+                {field:'goodsUp',title:'购买',formatter:function(value,rows,index){
+                        return "<a onclick='addOrder("+rows.goodsId+")'>购买</a>"
+                    }}
+            ]
+        })
+    }
+</script>
+<script>
+    function addOrder(id){
+        alert(id)
+    }
+</script>
+</html>
